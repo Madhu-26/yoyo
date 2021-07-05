@@ -4,8 +4,18 @@ require_once('db/db.php');
 session_start();
 
 if (isset($_SESSION['login']) && ($_SESSION['login']==true)) {
-  header("Location: user/index.php");
-  die();
+  if ($_SESSION['userStatus'] == 1) {
+    if (($_SESSION['userType'] == 1)) {
+      header("Location: user/index");
+    } else {
+      header("Location: admin/index");
+    }
+    die();
+  } elseif ($_SESSION['userStatus']==0) {
+    $_SESSION['loginError'] = "You are not confirmed, user details.";
+  } else {
+    $_SESSION['loginError'] = "You are banned by Adminstration.";
+  }
 } 
 
 if (isset($_POST['login'])) {
@@ -17,6 +27,12 @@ if (isset($_POST['login'])) {
     $conn->close();
     if ($queryCount->num_rows == 1) {
       $_SESSION['login'] = true;
+      $resultCount = $queryCount->fetch_assoc();
+      $_SESSION['userId'] = $resultCount['userId'];
+      $_SESSION['userType'] = $resultCount['type'];
+      $_SESSION['userStatus'] = $resultCount['status'];
+      $_SESSION['fName'] = $resultCount['fName'];
+      $_SESSION['lName'] = $resultCount['lName'];
       header("Refresh:0");
       die();
     } else {
@@ -64,6 +80,7 @@ if (isset($_POST['login'])) {
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <link rel="stylesheet" href="css/style.css">
   </head>
@@ -87,6 +104,7 @@ if (isset($_POST['login'])) {
           <?php 
             if (isset($_SESSION['loginError'])) {
               echo $_SESSION['loginError'];
+              unset ($_SESSION['loginError']);
             }
            ?>
         </div>
@@ -94,6 +112,7 @@ if (isset($_POST['login'])) {
           <?php 
             if (isset($_SESSION['loginSuccess'])) {
               echo $_SESSION['loginSuccess'];
+              unset ($_SESSION['loginSuccess']);
             }
            ?>
         </div>
@@ -127,25 +146,26 @@ if (isset($_POST['login'])) {
         </div>
         <div class="textbox">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Password" name="pass" tabindex="5" required>
+          <input type="password" placeholder="Password" name="pass" tabindex="5" required id="pass" onkeyup="signupValidate();" minlength="6">
         </div>
         <div class="textbox">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Confirm Password" name="passConfirm" tabindex="6" required>
+          <input type="password" placeholder="Confirm Password" name="passConfirm" tabindex="6" required id="passConfirm" onkeyup="signupValidate();" minlength="6">
         </div>
-        <div class="errorMsg">
+        <div class="errorMsg" id="errorMsg">
           <?php 
             if (isset($_SESSION['loginError'])) {
               echo $_SESSION['loginError'];
+              unset ($_SESSION['loginError']);
             }
            ?>
         </div>
-        <button type="submit" class="btn" name="signUp" tabindex="7">Sign Up</button>
+        <button type="submit" class="btn" name="signUp" tabindex="7" id="signUp">Sign Up</button>
         <div class="alt-link">
           <span onclick="login();" tabindex="8">Already have an account?</span>
         </div>
       </form>
     </div>
+    <script src="js/script.js"></script>
   </body>
-  <script src="js/script.js"></script>
 </html>

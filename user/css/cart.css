@@ -1,0 +1,156 @@
+* body {
+	color: #fff;
+}
+
+.cart > div {
+	display: inline;
+	float: left;
+	background-color: rgba(250,250,250, 0.3);
+	margin-left: 2%;
+	padding: 1%;
+	border-radius: 4px;
+}
+.select-cart {
+	width: 70%;
+	margin-top: 5%; 
+}
+.summary {
+	width: 20%;
+	margin-top: 5%;
+}
+.cart-list {
+	clear: both;
+	margin-top: -8%;
+	width: 70%;
+}
+
+.summary > div > div {
+	text-transform: uppercase;
+	text-align: justify;
+	margin-bottom: 5%;
+} 
+
+.summary > div > div > span {
+	float: right;	
+} 
+
+.total {
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.btn {
+	border: none;
+	border-radius: 4px;
+	background-color: rgba(255,0,0,0.8);
+	outline: none;
+}
+
+.btn:hover {
+	background-color: darkred;
+}
+
+.cart-item > .select-div > img {
+	width: 160px;
+	height: 100px;
+}
+
+.cart-item .select-mark {
+	transform: translateY(200%);
+}
+
+.cart-item .select-div .desc-div {
+	float: left;
+	float: right;
+	padding-right: 30%;
+}
+
+.desc-div > .price {
+	font-weight: bold;
+	font-size: 20px;
+	margin-top: 12.5%;
+}
+
+.fa-trash {
+	color: #f24;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+.fa-trash:hover {
+	color: pink;
+}
+
+.remove-btn {
+	background-color: transparent;
+	border: none;
+	outline: none;
+}
+
+.trash-btn {
+	border: none;
+	background-color: transparent;
+	display: inline;float: left;
+}
+
+.quantity-added {
+	float: right;
+	color: #000;
+}
+
+#payment-window {
+	display: none;
+	position: absolute;
+	z-index: 100;
+	width: 40%;
+	height: 60%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: solid 3px #555;
+	border-radius: 4px;
+	padding: 10px;
+	background-color: rgba(255,255,255,1);
+	text-align: center;
+	color: #000;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+#payment-window label {
+	display: block;
+	text-align: left;
+	transform: translateX(24%);
+	margin-bottom: 10px;
+	margin-top: 15px;
+}
+
+#payment-window input {
+	width: 50%;
+	outline: none;
+	border: none;
+	border-bottom: 1px red solid;
+}
+
+#payment-window button {
+	margin-top: 5px;
+	width: 50%;
+	background-color: gray;
+}
+
+#closePayment {
+	float: right;
+	cursor: pointer;
+	transition: 0.5s;
+}
+
+#closePayment:hover {
+	color: red;
+}
